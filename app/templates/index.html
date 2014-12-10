@@ -10,17 +10,22 @@
 
 <div class="container">
     <div class="page-header">
-        <h1>Todo</h1>
+        <h1>awesome-flask-todo</h1>
     </div>
     <div class="row">
         <div class="col-lg-10">
 
-            <form class="input-group" action="/add" method="post">
-                <input class="form-control" id="content" name="content" type="text" value="">
+             <form class="input-group" action="/add" method="post">
+                {{ form.hidden_tag() }}
+                {{ form.content(class="form-control") }}
                 <span class="input-group-btn">
                     <button class="btn btn-primary" type="submit">Add</button>
                 </span>
             </form>
+            {% for error in form.errors.content %}
+                <div class="flash alert-danger"><span>{{ error }}</span></div>
+            {% endfor %}
+
             <h2>Todo List</h2>
             <table class="table">
                 <thead>
@@ -37,9 +42,9 @@
                         <td>{{ t.time }}</td>
                         <td>
                             {% if t.status == 0 %}
-                                <a href="/done/{{ t.id }}" class="btn btn-primary"> Done </a>
+                                 <a href="/done/{{ t.id }}" class="btn btn-primary">Done</a>
                             {% else %}
-                                <a href="/undone/{{ t.id }}" class="btn btn-primary"> Undone </a>
+                                 <a href="/undone/{{ t.id }}" class="btn btn-primary">Undone</a>
                             {% endif %}
                             <a href="/delete/{{ t.id }}" class="btn btn-danger">Delete</a>
                         </td>
