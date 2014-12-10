@@ -1,17 +1,55 @@
-<table class="table">
-<thead>
-<tr>
-<td>Content</td>
-<td>Time</td>
-<td>Status</td>
-</tr>
-</thead>
-<tbody>
-{% for t in todos %}
-<tr>
-<td>{{ t.content }}</td>
-<td>{{ t.time }}</td>
-<td>{{ t.status }}</td>
-</tr>
-{% endfor %}
-</tbody>
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="{{ url_for('static',filename='bootstrap.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ url_for('static',filename='index.css') }}" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<div class="container">
+    <div class="page-header">
+        <h1>Todo</h1>
+    </div>
+    <div class="row">
+        <div class="col-lg-10">
+
+            <form class="input-group" action="/add" method="post">
+                <input class="form-control" id="content" name="content" type="text" value="">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="submit">Add</button>
+                </span>
+            </form>
+            <h2>Todo List</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>Content</td>
+                        <td>Time</td>
+                        <td>Status</td>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for t in todos %}
+                    <tr>
+                        <td>{{ t.content }}</td>
+                        <td>{{ t.time }}</td>
+                        <td>{{ t.status }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted">Copyright © defshine 2014</p>
+    </div>
+</footer>
+</body>
+</html>
