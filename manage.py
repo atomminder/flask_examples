@@ -13,8 +13,8 @@ manager.add_command("runserver",
 
 
 @manager.command
-def save_todo():
-    todo = Todo(content="my first todo")
+def save_todo(twits):
+    todo = Todo(content=twits)
     todo.save()
 
 
