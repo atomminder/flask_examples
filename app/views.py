@@ -4,10 +4,9 @@ from models import Todo, TodoForm
 
 @app.route('/')
 def index():
-    form = TodoForm()
-    todos = Todo.objects.all()
-    return render_template("index.html", todos=todos, form=form)
-
+	form = TodoForm()
+	todos = Todo.objects.order_by('-time')
+	return render_template("index.html", todos=todos, form=form)
 
 @app.route('/add', methods=['POST', ])
 def add():
@@ -42,7 +41,8 @@ def undone(todo_id):
 
 @app.route('/delete/<string:todo_id>')
 def delete(todo_id):
+    form = TodoForm()
     todo = Todo.objects.get_or_404(id=todo_id)
     todo.delete()
-    todos = Todo.objects.all()
+    todos = Todo.objects.order_by('-time')
     return render_template("index.html", todos=todos, form=form)
